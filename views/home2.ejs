@@ -29,9 +29,9 @@
                       </svg></i> <span class="nav_name">Create Menu</span> </a>  <a href="/view" class="nav_link"><i class='bx bxs-user-badge' ></i><span class="nav_name">Manage Staff</span></a> 
                       <a href="/generateqr" class="nav_link "> <i class='bx bx-qr'></i><span class="nav_name">Generate QR</span> </a><a href="/qrcode" class="nav_link"> <i class='bx bx-qr-scan'></i><span class="nav_name">Display QR</span> </a>
                     </div>
-                </div> <form method="get" action="/logout">
+                </div> <<form method="get" action="/logout">
                     <input type="hidden" name="name" value="value" /> 
-                    <a onclick="this.parentNode.submt();" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a></form>
+                    <a onclick="this.parentNode.submit();" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a></form>
             </nav>
         </div>
         <!--Container Main start-->
@@ -98,7 +98,7 @@
             }
     
         </script>
-        <script src="/public/js/home.js"></script>
+        <script src="js/home.js"></script>
     </body>
     </html>
 
