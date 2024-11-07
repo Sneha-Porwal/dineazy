@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
 
@@ -20,13 +20,13 @@
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="images/otp.jpg" alt="sing up image"></figure>
-                        <a href="/login" class="signup-image-link">I am already member</a>
+                        <figure><img src="public/images/otp.jpg" alt="sing up image"></figure>
+                        <a href="login.html" class="signup-image-link">I am already member</a>
                     </div>
 
                     <div class="signin-form">
                         <h2 class="form-title">Enter the OTP for verification</h2>
-                        <form action="/verification" method="post">
+                        <form action="verification.html" method="post">
                           <div class="form-group">
                             <input class="form-control" type="otp" name="otp" placeholder="OTP"></div>
                           <!-- <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Create Password"></div> -->
@@ -59,7 +59,7 @@
         }
         getParameters();
     </script>
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="public/vendor/jquery/jquery.min.js"></script>
     <!-- <script src="js/main.js"></script> -->
 </body>
 </html>

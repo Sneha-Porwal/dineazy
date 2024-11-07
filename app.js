@@ -20,10 +20,10 @@ const { log } = require('console');
 
  
 const con = mysql.createConnection({
-    host:'sql12.freesqldatabase.com',
-    user:'sql12654117',
-    password:'8jFn793WfA',
-    database:'sql12654117'
+    host:'localhost',
+    user:'root',
+    password:'Tiger',
+    database:'onlinemenu'
 })
 
 con.connect(function(err) {
@@ -47,9 +47,6 @@ app.post("/customer-signup",(req,res)=>{
         if(result.length===0){
             
             gemail=email;
-            
-            
-            
             function mailSend(email)
 	        {
                 //nodemailer
@@ -177,32 +174,45 @@ app.post("/auth",(request,response)=>{
 })
 
 var rphoneno;
-app.post("/resto_membership",(req,res)=>{
-    const name = req.body.name;
-    const phone_no = req.body.phone_no;
-    rphoneno=req.body.phone_no;
-    var id = "SELECT id FROM restaurant WHERE phoneno ='"+phone_no+"'";
-    
-    
-    con.query(id,function(err,result){
-        if(err) throw err;
-        console.log(result);
-        if(result.length===0){
-            const address = req.body.address;
-            var sql = "INSERT INTO restaurant (name,addr,phoneno) VALUES ('"+name+"', '"+address+"', '"+phone_no+"')";
-            con.query(sql, function(err,re){
-                if(err) throw err;
-                else console.log("1 record inserted");
-                console.log(re);
-            })
-            res.redirect("/paym");
-        }
-        else{
-            res.send("membership not created");
-        }
-    });
+app.post("/resto_membership", async (req, res) => {
+  const name = req.body.name;
+  const phone_no = req.body.phone_no;
+  rphoneno = req.body.phone_no;
+  const id = "SELECT id FROM restaurant WHERE phoneno = '" + phone_no + "'";
 
-})
+  try {
+      const result = await new Promise((resolve, reject) => {
+          con.query(id, function (err, result) {
+              if (err) reject(err);
+              else resolve(result);
+          });
+      });
+
+      console.log(result);
+
+      if (result.length === 0) {
+          const address = req.body.address;
+          const sql = "INSERT INTO restaurant (name, addr, phoneno) VALUES ('" + name + "', '" + address + "', '" + phone_no + "')";
+
+          const re = await new Promise((resolve, reject) => {
+              con.query(sql, function (err, re) {
+                  if (err) reject(err);
+                  else resolve(re);
+              });
+          });
+
+          console.log("1 record inserted");
+          console.log(re);
+          res.redirect("/paym");
+      } else {
+          res.send("membership not created");
+      }
+  } catch (err) {
+      console.error(err);
+      // Handle the error and send an appropriate response
+      res.status(500).send("Internal Server Error");
+    }
+});
 
 //payment
 app.post('/resto_owner', (req, res) => {
